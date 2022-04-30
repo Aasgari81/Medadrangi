@@ -27,7 +27,7 @@ class Medadrangi:
         self.made_in = made_in
         self.factory = factory
         
-        with open("D:\projects\OOP2\Products.csv", "r") as prdct:
+        with open("Products.csv", "r") as prdct:
             products_reader = csv.DictReader(prdct)
             product = {"name" : self.name, "price" : self.price, "amount" : self.amount, "made_in" : self.made_in, "factory" : self.factory}
             result = False
@@ -41,7 +41,7 @@ class Medadrangi:
                             m.append(prod)
 
                     specific_product["amount"] = int(specific_product["amount"]) + self.amount
-                    with open("D:\projects\OOP2\Products.csv", "w") as prdc:
+                    with open("Products.csv", "w") as prdc:
                         fieldname = ["name", "price", "amount", "made_in", "factory"]
                         product_writer = csv.DictWriter(prdc, fieldnames=fieldname)
                         product_writer.writeheader()
@@ -50,7 +50,7 @@ class Medadrangi:
                         product_writer.writerow(specific_product)
                         
             if not result:
-                with open("D:\projects\OOP2\Products.csv", "a") as prdc:
+                with open("Products.csv", "a") as prdc:
                     fieldname = ["name", "price", "amount", "made_in", "factory"]
                     product_writer = csv.DictWriter(prdc ,fieldnames=fieldname)
                     product_writer.writerow(product)
@@ -83,8 +83,9 @@ class Medadrangi:
     def load_csv (path):
         with open (f'{path}', "r") as file :
             csv_reader = csv.DictReader(file)
-            with open("Products.csv", "w") as products : 
-                products_writer = csv.DictWriter(products)
+            with open("Products.csv", "a") as products : 
+                fieldname = ["name", "price", "amount", "made_in", "factory"]
+                products_writer = csv.DictWriter(products, fieldnames=fieldname)
                 for product_information in csv_reader:
                     products_writer.writerow(product_information)
 
